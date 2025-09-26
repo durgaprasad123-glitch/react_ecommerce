@@ -1,0 +1,59 @@
+/* src/App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(180deg, #343a40, #212529);
+}
+
+/* Products */
+.card {
+  transition: transform 0.2s;
+  border: none;
+  border-radius: 10px;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.card-body {
+  text-align: center;
+}
+
+/* Forms (AddProduct, AddUser, Login) */
+.form-control {
+  border-radius: 8px;
+}
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+}
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* General layout */
+.container {
+  max-width: 1200px;
+}
+main {
+  flex: 1;
+}
