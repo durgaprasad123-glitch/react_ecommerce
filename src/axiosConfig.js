@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://127.0.0.1:8000/",
+  baseURL: "https://fsd-python-o12d.onrender.com/", // your deployed backend
   headers: { "Content-Type": "application/json" },
-  // withCredentials: true, // important for sessions/cookies
+  // withCredentials: true, // keep commented unless using session cookies
 });
 
 export default API;
