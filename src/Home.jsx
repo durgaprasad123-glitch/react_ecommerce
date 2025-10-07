@@ -98,7 +98,7 @@
 // }
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./services/context/AuthContext";
-import axios from "axios";
+import API from "./axiosConfig"; // ✅ use centralized axios instance
 
 export function Home() {
   const { user, loggedIn, handleLogin, token, logout } = useContext(AuthContext);
@@ -114,11 +114,7 @@ export function Home() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/login/", {
-        username,
-        password,
-      });
-
+      const response = await API.post("login/", { username, password }); // ✅ relative to API baseURL
       if (response.data.success) {
         handleLogin(response.data.username, response.data.token);
         alert("Login successful");
@@ -134,10 +130,9 @@ export function Home() {
   // ---------------- Fetch Products ----------------
   const getProducts = async (authToken) => {
     try {
-      const response = await axios.get("http://localhost:8000/api/products/", {
+      const response = await API.get("products/", {
         headers: { Authorization: `Token ${authToken}` },
       });
-
       setProducts(response.data);
     } catch (err) {
       console.error("Failed to fetch products:", err.response?.data || err.message);
@@ -145,11 +140,8 @@ export function Home() {
     }
   };
 
-  // Fetch products whenever token changes (after login)
   useEffect(() => {
-    if (token) {
-      getProducts(token);
-    }
+    if (token) getProducts(token); // fetch products after login
   }, [token]);
 
   // ---------------- Logout ----------------

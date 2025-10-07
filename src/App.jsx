@@ -11,6 +11,7 @@ import NavbarComp from "./Navbar";
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

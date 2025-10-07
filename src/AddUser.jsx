@@ -1,7 +1,7 @@
 // src/AddUser.jsx
 import { useState } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-import axios from 'axios';
+import API from './axiosConfig'; // ✅ Use the centralized axios instance
 
 function AddUser() {
   const [username, setUsername] = useState('');
@@ -16,27 +16,13 @@ function AddUser() {
     setSuccess(null);
 
     try {
-      await axios.get('http://localhost:8000/api/get-csrf-token/', {
-        withCredentials: true,
-      });
-
-      const response = await axios.post(
-        'http://localhost:8000/api/register/',
-        { username, email, password },
-        {
-          withCredentials: true,
-          headers: {
-            'X-CSRFToken': document.cookie
-              .match(/csrftoken=([^;]+)/)?.[1] || '',
-          },
-        }
-      );
+      const response = await API.post('signup/', { username, email, password }); // ✅ relative to API baseURL
       setSuccess('User added successfully!');
       setUsername('');
       setEmail('');
       setPassword('');
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to add user');
+      setError(err.response?.data?.error || 'Failed to add user');
     }
   };
 
