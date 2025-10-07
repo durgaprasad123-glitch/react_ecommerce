@@ -1,15 +1,17 @@
 import axios from "axios";
 
-// Base axios instance
+// Base axios instance for deployed backend
 const API = axios.create({
-  baseURL: "https://fsd-python-o12d.onrender.com/api/", // deployed backend
+  baseURL: "https://fsd-python-o12d.onrender.com/api/", // ✅ backend deployed URL with /api
   headers: { "Content-Type": "application/json" },
 });
 
-// If you need token auth, add an interceptor
-API.interceptors.request.use(config => {
-  const token = localStorage.getItem("token"); // store token on login
-  if (token) config.headers.Authorization = `Token ${token}`;
+// Optional: Add token interceptor if using token-based auth
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Token ${token}`;
+  }
   return config;
 });
 
